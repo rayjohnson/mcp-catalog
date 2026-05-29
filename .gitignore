@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+
+# Node / Cloudflare Worker
+node_modules/
+.wrangler/
+dist/
+
+# macOS
+.DS_Store

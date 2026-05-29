@@ -1,0 +1,459 @@
+{
+  "metadata": {
+    "schemaVersion": "2",
+    "bundledAt": "2026-05-29T00:00:00Z",
+    "entryCount": 18
+  },
+  "entries": [
+    {
+      "id": "github",
+      "displayName": "GitHub",
+      "category": "Code & Development",
+      "shortDescription": "Interact with GitHub repositories, issues, pull requests, and workflows.",
+      "curatorNote": "The reference implementation from the MCP team. Covers the most common GitHub operations. Requires a PAT with repo scope — use a fine-grained token scoped to specific repos when possible.",
+      "transportType": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "url": "",
+      "envVars": [
+        {
+          "name": "GITHUB_PERSONAL_ACCESS_TOKEN",
+          "description": "GitHub personal access token with repo scope. Create at github.com/settings/tokens. Prefer fine-grained tokens scoped to specific repositories.",
+          "isRequired": true,
+          "isSensitive": true
+        }
+      ],
+      "requiredArgs": [],
+      "documentationURL": "https://github.com/modelcontextprotocol/servers/tree/main/src/github",
+      "repositoryURL": "https://github.com/modelcontextprotocol/servers",
+      "isVerified": true,
+      "isFirstParty": false,
+      "alternativeTo": null,
+      "serverKey": "github"
+    },
+    {
+      "id": "filesystem",
+      "displayName": "Filesystem",
+      "category": "Code & Development",
+      "shortDescription": "Read, write, and navigate local files and directories with configurable path restrictions.",
+      "curatorNote": "The standard local filesystem server. You must specify which directories the server is allowed to access as additional arguments — the server will refuse to read or write outside those paths. Scope it as narrowly as possible.",
+      "transportType": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem"],
+      "url": "",
+      "envVars": [],
+      "requiredArgs": [
+        {
+          "name": "allowed-directory",
+          "description": "One or more absolute paths the server is permitted to access. Pass multiple paths as separate arguments.",
+          "placeholder": "/path/to/project",
+          "isRequired": true
+        }
+      ],
+      "documentationURL": "https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem",
+      "repositoryURL": "https://github.com/modelcontextprotocol/servers",
+      "isVerified": true,
+      "isFirstParty": false,
+      "alternativeTo": null,
+      "serverKey": "filesystem"
+    },
+    {
+      "id": "git",
+      "displayName": "Git",
+      "category": "Code & Development",
+      "shortDescription": "Execute git operations, read history, and inspect repository state.",
+      "curatorNote": "The Python-based uvx server from the MCP team. Reads and writes git repos. Pass `--repository /path/to/repo` as an argument after adding to your library, or it will default to the current working directory.",
+      "transportType": "stdio",
+      "command": "uvx",
+      "args": ["mcp-server-git"],
+      "url": "",
+      "envVars": [],
+      "requiredArgs": [
+        {
+          "name": "--repository",
+          "description": "Absolute path to the git repository to operate on.",
+          "placeholder": "/path/to/repo",
+          "isRequired": false
+        }
+      ],
+      "documentationURL": "https://github.com/modelcontextprotocol/servers/tree/main/src/git",
+      "repositoryURL": "https://github.com/modelcontextprotocol/servers",
+      "isVerified": true,
+      "isFirstParty": false,
+      "alternativeTo": null,
+      "serverKey": "git"
+    },
+    {
+      "id": "memory",
+      "displayName": "Memory",
+      "category": "Code & Development",
+      "shortDescription": "Persistent key-value memory store using a knowledge graph for cross-session context.",
+      "curatorNote": "Gives your AI agent a place to store and retrieve facts across sessions. Uses a local knowledge graph file. Useful for projects where you want the model to remember context between conversations.",
+      "transportType": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "url": "",
+      "envVars": [],
+      "requiredArgs": [],
+      "documentationURL": "https://github.com/modelcontextprotocol/servers/tree/main/src/memory",
+      "repositoryURL": "https://github.com/modelcontextprotocol/servers",
+      "isVerified": true,
+      "isFirstParty": false,
+      "alternativeTo": null,
+      "serverKey": "memory"
+    },
+    {
+      "id": "fetch",
+      "displayName": "Fetch",
+      "category": "Web & Browser",
+      "shortDescription": "Fetch web pages and convert them to Markdown for LLM consumption.",
+      "curatorNote": "Simple and reliable. Strips boilerplate and returns clean Markdown. Good for reading docs, articles, and pages that don't require JavaScript rendering. For JS-heavy sites use the Puppeteer server instead.",
+      "transportType": "stdio",
+      "command": "uvx",
+      "args": ["mcp-server-fetch"],
+      "url": "",
+      "envVars": [],
+      "requiredArgs": [],
+      "documentationURL": "https://github.com/modelcontextprotocol/servers/tree/main/src/fetch",
+      "repositoryURL": "https://github.com/modelcontextprotocol/servers",
+      "isVerified": true,
+      "isFirstParty": false,
+      "alternativeTo": null,
+      "serverKey": "fetch"
+    },
+    {
+      "id": "puppeteer",
+      "displayName": "Puppeteer",
+      "category": "Web & Browser",
+      "shortDescription": "Browser automation and web scraping using Puppeteer with screenshot support.",
+      "curatorNote": "Full headless Chrome via Puppeteer. Use when Fetch isn't enough — JS-rendered pages, click flows, or screenshots. Heavier to run than Fetch; skip it if static fetching suffices.",
+      "transportType": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-puppeteer"],
+      "url": "",
+      "envVars": [],
+      "requiredArgs": [],
+      "documentationURL": "https://github.com/modelcontextprotocol/servers/tree/main/src/puppeteer",
+      "repositoryURL": "https://github.com/modelcontextprotocol/servers",
+      "isVerified": true,
+      "isFirstParty": false,
+      "alternativeTo": null,
+      "serverKey": "puppeteer"
+    },
+    {
+      "id": "brave-search",
+      "displayName": "Brave Search",
+      "category": "Web & Browser",
+      "shortDescription": "Web and local search using the Brave Search API.",
+      "curatorNote": "Good privacy-respecting web search. Free tier gives 2,000 queries/month which is plenty for personal use. Requires a Brave Search API key — sign up at brave.com/search/api.",
+      "transportType": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+      "url": "",
+      "envVars": [
+        {
+          "name": "BRAVE_API_KEY",
+          "description": "Brave Search API key. Free tier available at brave.com/search/api.",
+          "isRequired": true,
+          "isSensitive": true
+        }
+      ],
+      "requiredArgs": [],
+      "documentationURL": "https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search",
+      "repositoryURL": "https://github.com/modelcontextprotocol/servers",
+      "isVerified": true,
+      "isFirstParty": false,
+      "alternativeTo": null,
+      "serverKey": "brave-search"
+    },
+    {
+      "id": "postgresql",
+      "displayName": "PostgreSQL",
+      "category": "Data & Analytics",
+      "shortDescription": "Connect to PostgreSQL databases, run queries, and inspect schema.",
+      "curatorNote": "Connect your AI to a Postgres database. Creates a read-only connection by default. Pass the full connection string including credentials. Be mindful about pointing this at production databases.",
+      "transportType": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres"],
+      "url": "",
+      "envVars": [
+        {
+          "name": "POSTGRES_CONNECTION_STRING",
+          "description": "PostgreSQL connection string, e.g. postgresql://user:password@localhost:5432/dbname",
+          "isRequired": true,
+          "isSensitive": true
+        }
+      ],
+      "requiredArgs": [],
+      "documentationURL": "https://github.com/modelcontextprotocol/servers/tree/main/src/postgres",
+      "repositoryURL": "https://github.com/modelcontextprotocol/servers",
+      "isVerified": true,
+      "isFirstParty": false,
+      "alternativeTo": null,
+      "serverKey": "postgresql"
+    },
+    {
+      "id": "sqlite",
+      "displayName": "SQLite",
+      "category": "Data & Analytics",
+      "shortDescription": "Read and query SQLite database files with full SQL support.",
+      "curatorNote": "Great for local databases and data files. Pass `--db-path /absolute/path/to/database.db` as an argument after adding to your library. The server also supports creating and writing to databases.",
+      "transportType": "stdio",
+      "command": "uvx",
+      "args": ["mcp-server-sqlite"],
+      "url": "",
+      "envVars": [],
+      "requiredArgs": [
+        {
+          "name": "--db-path",
+          "description": "Absolute path to the SQLite database file to open or create.",
+          "placeholder": "/path/to/database.db",
+          "isRequired": true
+        }
+      ],
+      "documentationURL": "https://github.com/modelcontextprotocol/servers/tree/main/src/sqlite",
+      "repositoryURL": "https://github.com/modelcontextprotocol/servers",
+      "isVerified": true,
+      "isFirstParty": false,
+      "alternativeTo": null,
+      "serverKey": "sqlite"
+    },
+    {
+      "id": "slack",
+      "displayName": "Slack",
+      "category": "Communication",
+      "shortDescription": "Read messages, post to channels, and manage Slack workspace data.",
+      "curatorNote": "Solid Slack integration from the MCP team. Needs a Slack app with bot token — create one at api.slack.com/apps. Required scopes: channels:read, chat:write, im:read, users:read.",
+      "transportType": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-slack"],
+      "url": "",
+      "envVars": [
+        {
+          "name": "SLACK_BOT_TOKEN",
+          "description": "Slack bot token starting with xoxb-. Create a Slack app at api.slack.com/apps and install it to your workspace.",
+          "isRequired": true,
+          "isSensitive": true
+        },
+        {
+          "name": "SLACK_TEAM_ID",
+          "description": "Your Slack workspace team ID. Found in the workspace URL or via the API.",
+          "isRequired": true,
+          "isSensitive": false
+        }
+      ],
+      "requiredArgs": [],
+      "documentationURL": "https://github.com/modelcontextprotocol/servers/tree/main/src/slack",
+      "repositoryURL": "https://github.com/modelcontextprotocol/servers",
+      "isVerified": true,
+      "isFirstParty": false,
+      "alternativeTo": null,
+      "serverKey": "slack"
+    },
+    {
+      "id": "google-drive",
+      "displayName": "Google Drive",
+      "category": "Productivity",
+      "shortDescription": "Search, read, and export files from Google Drive including Docs, Sheets, and Slides.",
+      "curatorNote": "From the MCP team. Requires OAuth setup — run the server once manually to complete the browser-based auth flow, which stores credentials locally. After that it runs headlessly.",
+      "transportType": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-gdrive"],
+      "url": "",
+      "envVars": [],
+      "requiredArgs": [],
+      "documentationURL": "https://github.com/modelcontextprotocol/servers/tree/main/src/gdrive",
+      "repositoryURL": "https://github.com/modelcontextprotocol/servers",
+      "isVerified": true,
+      "isFirstParty": false,
+      "alternativeTo": null,
+      "serverKey": "google-drive"
+    },
+    {
+      "id": "linear",
+      "displayName": "Linear",
+      "category": "Productivity",
+      "shortDescription": "Manage Linear issues, projects, and teams from your AI assistant.",
+      "curatorNote": "Community-maintained server by jerhadf. Works well for reading and creating issues. Note: this is not the official Linear server — Linear has not released their own MCP server as of this writing.",
+      "transportType": "stdio",
+      "command": "npx",
+      "args": ["-y", "mcp-linear"],
+      "url": "",
+      "envVars": [
+        {
+          "name": "LINEAR_API_KEY",
+          "description": "Linear API key. Generate one at linear.app/settings/api.",
+          "isRequired": true,
+          "isSensitive": true
+        }
+      ],
+      "requiredArgs": [],
+      "documentationURL": "https://github.com/jerhadf/linear-mcp-server",
+      "repositoryURL": "https://github.com/jerhadf/linear-mcp-server",
+      "isVerified": false,
+      "isFirstParty": false,
+      "alternativeTo": null,
+      "serverKey": "linear"
+    },
+    {
+      "id": "notion",
+      "displayName": "Notion",
+      "category": "Productivity",
+      "shortDescription": "Read and write Notion pages, databases, and blocks.",
+      "curatorNote": "The official first-party Notion MCP server, maintained by the Notion team. Uses the Notion API via an integration token. Create an integration at notion.so/my-integrations and share it with the pages you want to access.",
+      "transportType": "stdio",
+      "command": "npx",
+      "args": ["-y", "@notionhq/notion-mcp-server"],
+      "url": "",
+      "envVars": [
+        {
+          "name": "OPENAPI_MCP_HEADERS",
+          "description": "JSON object with your Notion integration token: {\"Authorization\": \"Bearer ntn_YOUR_TOKEN\", \"Notion-Version\": \"2022-06-28\"}. Create an integration at notion.so/my-integrations.",
+          "isRequired": true,
+          "isSensitive": true
+        }
+      ],
+      "requiredArgs": [],
+      "documentationURL": "https://github.com/makenotion/notion-mcp-server",
+      "repositoryURL": "https://github.com/makenotion/notion-mcp-server",
+      "isVerified": true,
+      "isFirstParty": true,
+      "alternativeTo": null,
+      "serverKey": "notion"
+    },
+    {
+      "id": "home-assistant",
+      "displayName": "Home Assistant",
+      "category": "Infrastructure",
+      "shortDescription": "Control smart home devices and query entity states via Home Assistant.",
+      "curatorNote": "Community server by tevonsb. Works reliably for reading sensor states and controlling devices. Your Home Assistant instance must be reachable from the machine running the server.",
+      "transportType": "stdio",
+      "command": "uvx",
+      "args": ["mcp-server-home-assistant"],
+      "url": "",
+      "envVars": [
+        {
+          "name": "HASS_URL",
+          "description": "Base URL of your Home Assistant instance, e.g. http://homeassistant.local:8123",
+          "isRequired": true,
+          "isSensitive": false
+        },
+        {
+          "name": "HASS_TOKEN",
+          "description": "Long-lived access token. Generate one from your Home Assistant profile under Security > Long-Lived Access Tokens.",
+          "isRequired": true,
+          "isSensitive": true
+        }
+      ],
+      "requiredArgs": [],
+      "documentationURL": "https://github.com/tevonsb/homeassistant-mcp",
+      "repositoryURL": "https://github.com/tevonsb/homeassistant-mcp",
+      "isVerified": false,
+      "isFirstParty": false,
+      "alternativeTo": null,
+      "serverKey": "home-assistant"
+    },
+    {
+      "id": "docker",
+      "displayName": "Docker",
+      "category": "Infrastructure",
+      "shortDescription": "Manage Docker containers, images, volumes, and networks.",
+      "curatorNote": "Community server by ckreiling. Gives your AI full Docker daemon access — it can start, stop, and inspect containers. Docker Desktop must be running. Use carefully in shared environments.",
+      "transportType": "stdio",
+      "command": "uvx",
+      "args": ["mcp-server-docker"],
+      "url": "",
+      "envVars": [],
+      "requiredArgs": [],
+      "documentationURL": "https://github.com/ckreiling/mcp-server-docker",
+      "repositoryURL": "https://github.com/ckreiling/mcp-server-docker",
+      "isVerified": false,
+      "isFirstParty": false,
+      "alternativeTo": null,
+      "serverKey": "docker"
+    },
+    {
+      "id": "aws-kb-retrieval",
+      "displayName": "AWS Knowledge Base",
+      "category": "Infrastructure",
+      "shortDescription": "Retrieve information from AWS Bedrock Knowledge Bases using RAG.",
+      "curatorNote": "From the MCP team. Requires an existing AWS Bedrock Knowledge Base — set one up in the AWS console before adding this server. Your IAM credentials need bedrock:Retrieve permission.",
+      "transportType": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-aws-kb-retrieval-server"],
+      "url": "",
+      "envVars": [
+        {
+          "name": "AWS_ACCESS_KEY_ID",
+          "description": "AWS access key ID with bedrock:Retrieve permission.",
+          "isRequired": true,
+          "isSensitive": true
+        },
+        {
+          "name": "AWS_SECRET_ACCESS_KEY",
+          "description": "AWS secret access key corresponding to the access key ID.",
+          "isRequired": true,
+          "isSensitive": true
+        },
+        {
+          "name": "AWS_REGION",
+          "description": "AWS region where your Bedrock Knowledge Base is deployed, e.g. us-east-1",
+          "isRequired": true,
+          "isSensitive": false
+        }
+      ],
+      "requiredArgs": [],
+      "documentationURL": "https://github.com/modelcontextprotocol/servers/tree/main/src/aws-kb-retrieval-server",
+      "repositoryURL": "https://github.com/modelcontextprotocol/servers",
+      "isVerified": true,
+      "isFirstParty": false,
+      "alternativeTo": null,
+      "serverKey": "aws-kb-retrieval"
+    },
+    {
+      "id": "claude-code",
+      "displayName": "Claude Code",
+      "category": "AI & LLMs",
+      "shortDescription": "Expose Claude Code as an MCP server for agent-to-agent workflows.",
+      "curatorNote": "The official Anthropic server that turns Claude Code into an MCP endpoint. Enables Claude to spawn sub-agents or delegate tasks to a Claude Code instance. Requires Claude Code to be installed and authenticated.",
+      "transportType": "stdio",
+      "command": "claude",
+      "args": ["mcp", "serve"],
+      "url": "",
+      "envVars": [],
+      "requiredArgs": [],
+      "documentationURL": "https://docs.anthropic.com/en/docs/claude-code/mcp",
+      "repositoryURL": "https://github.com/anthropics/claude-code",
+      "isVerified": true,
+      "isFirstParty": true,
+      "alternativeTo": null,
+      "serverKey": "claude-code"
+    },
+    {
+      "id": "exa-search",
+      "displayName": "Exa Search",
+      "category": "Web & Browser",
+      "shortDescription": "Neural search engine for finding relevant web content using semantic similarity.",
+      "curatorNote": "The official first-party server from Exa Labs. Semantic search rather than keyword matching — better for research and finding conceptually similar content. Free tier available; API key required.",
+      "transportType": "stdio",
+      "command": "npx",
+      "args": ["-y", "exa-mcp-server"],
+      "url": "",
+      "envVars": [
+        {
+          "name": "EXA_API_KEY",
+          "description": "Exa API key. Sign up and generate one at dashboard.exa.ai.",
+          "isRequired": true,
+          "isSensitive": true
+        }
+      ],
+      "requiredArgs": [],
+      "documentationURL": "https://github.com/exa-labs/exa-mcp-server",
+      "repositoryURL": "https://github.com/exa-labs/exa-mcp-server",
+      "isVerified": false,
+      "isFirstParty": true,
+      "alternativeTo": null,
+      "serverKey": "exa-search"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Browse the catalog
+    url: https://github.com/rayjohnson/mcp-catalog/blob/main/servers.json
+    about: View the current catalog of curated MCP servers
