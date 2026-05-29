@@ -1,0 +1,42 @@
+---
+name: Weekly Catalog Refresh
+
+on:
+  schedule:
+    - cron: "0 2 * * 1"  # Monday 2am UTC
+  workflow_dispatch:
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install requests anthropic PyGithub
+
+      - name: Run refresh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          REPO: ${{ github.repository }}
+        run: python scripts/refresh.py
+
+      - name: Commit stats update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add stats.json usage.json
+          git diff --cached --quiet || git commit -m "chore: weekly stats refresh"
+          git push

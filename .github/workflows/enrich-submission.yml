@@ -1,0 +1,62 @@
+---
+name: Enrich Server Submission
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  enrich:
+    if: github.event.label.name == 'submission'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install anthropic requests PyGithub
+
+      - name: Run enrichment
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          REPO: ${{ github.repository }}
+        run: python scripts/enrich.py
+
+      - name: Create Pull Request
+        if: env.ENRICHED_ENTRY_PATH != ''
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: submission/issue-${{ github.event.issue.number }}
+          title: >
+            [Submission] ${{ env.ENRICHED_SERVER_NAME }} (issue #${{ github.event.issue.number }})
+          body: |
+            AI-enriched catalog entry from issue #${{ github.event.issue.number }}.
+
+            **Curator checklist before merging:**
+            - [ ] Display name and description are accurate
+            - [ ] Curator note is helpful and honest
+            - [ ] `command` + `args` are correct and tested
+            - [ ] All env vars are documented with descriptions
+            - [ ] `isFirstParty` is correctly set
+            - [ ] `category` is appropriate
+
+            Closes #${{ github.event.issue.number }}
+          draft: true
+          commit-message: >
+            Add ${{ env.ENRICHED_SERVER_NAME }} to catalog (from issue #${{ github.event.issue.number }})
