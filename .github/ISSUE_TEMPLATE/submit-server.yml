@@ -1,3 +1,4 @@
+---
 name: Submit MCP Server
 description: Suggest an MCP server for inclusion in the catalog
 title: "[Submission] "
@@ -6,16 +7,18 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for submitting an MCP server! A maintainer will review your submission and apply the `submission` label when it's ready for the AI enrichment pipeline.
+        Thanks for submitting an MCP server! A maintainer will review your
+        submission and apply the `submission` label to trigger the AI
+        enrichment pipeline.
 
   - type: input
     id: server_identifier
     attributes:
       label: Server identifier
       description: |
-        Provide one of the following:
+        Provide one of:
         - GitHub/Bitbucket/GitLab URL (e.g. `https://github.com/org/repo`)
-        - npm package name (e.g. `@scope/package-name` or `package-name`)
+        - npm package name (e.g. `@scope/package-name`)
         - uvx/PyPI package name (e.g. `mcp-server-foo`)
         - Docker image name (e.g. `docker.io/org/image:tag`)
       placeholder: "https://github.com/org/mcp-server-name"
@@ -26,7 +29,9 @@ body:
     id: why_useful
     attributes:
       label: Why is this server useful?
-      description: Optional — tell us what this server does well, any gotchas you've discovered, or why you think it belongs in the catalog.
+      description: >
+        Optional — tell us what this server does well, any gotchas you've
+        discovered, or why you think it belongs in the catalog.
       placeholder: "It handles X better than Y because..."
     validations:
       required: false
@@ -36,5 +41,5 @@ body:
     attributes:
       label: Duplicate check
       options:
-        - label: I searched the catalog and this server (or an equivalent) is not already listed
+        - label: I searched the catalog and this server is not already listed
           required: true
