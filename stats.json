@@ -1,7 +1,206 @@
 {
   "metadata": {
     "schemaVersion": "2",
-    "computedAt": "2026-05-29T00:00:00Z"
+    "computedAt": "2026-05-31T01:45:55.821353+00:00"
   },
-  "servers": {}
+  "servers": {
+    "github": {
+      "serverKey": "github",
+      "repositoryURL": "https://github.com/modelcontextprotocol/servers",
+      "isTrending": false,
+      "starCount": 86490,
+      "forkCount": 10870,
+      "openIssueCount": 492,
+      "isArchived": false,
+      "lastCommitDate": "2026-05-30T18:35:20Z",
+      "githubFetchedAt": "2026-05-31T01:45:55.821353+00:00"
+    },
+    "filesystem": {
+      "serverKey": "filesystem",
+      "repositoryURL": "https://github.com/modelcontextprotocol/servers",
+      "isTrending": false,
+      "starCount": 86490,
+      "forkCount": 10870,
+      "openIssueCount": 492,
+      "isArchived": false,
+      "lastCommitDate": "2026-05-30T18:35:20Z",
+      "githubFetchedAt": "2026-05-31T01:45:55.821353+00:00"
+    },
+    "git": {
+      "serverKey": "git",
+      "repositoryURL": "https://github.com/modelcontextprotocol/servers",
+      "isTrending": false,
+      "starCount": 86490,
+      "forkCount": 10870,
+      "openIssueCount": 492,
+      "isArchived": false,
+      "lastCommitDate": "2026-05-30T18:35:20Z",
+      "githubFetchedAt": "2026-05-31T01:45:55.821353+00:00"
+    },
+    "memory": {
+      "serverKey": "memory",
+      "repositoryURL": "https://github.com/modelcontextprotocol/servers",
+      "isTrending": false,
+      "starCount": 86490,
+      "forkCount": 10870,
+      "openIssueCount": 492,
+      "isArchived": false,
+      "lastCommitDate": "2026-05-30T18:35:20Z",
+      "githubFetchedAt": "2026-05-31T01:45:55.821353+00:00"
+    },
+    "fetch": {
+      "serverKey": "fetch",
+      "repositoryURL": "https://github.com/modelcontextprotocol/servers",
+      "isTrending": false,
+      "starCount": 86490,
+      "forkCount": 10870,
+      "openIssueCount": 492,
+      "isArchived": false,
+      "lastCommitDate": "2026-05-30T18:35:20Z",
+      "githubFetchedAt": "2026-05-31T01:45:55.821353+00:00"
+    },
+    "puppeteer": {
+      "serverKey": "puppeteer",
+      "repositoryURL": "https://github.com/modelcontextprotocol/servers",
+      "isTrending": false,
+      "starCount": 86490,
+      "forkCount": 10870,
+      "openIssueCount": 492,
+      "isArchived": false,
+      "lastCommitDate": "2026-05-30T18:35:20Z",
+      "githubFetchedAt": "2026-05-31T01:45:55.821353+00:00"
+    },
+    "brave-search": {
+      "serverKey": "brave-search",
+      "repositoryURL": "https://github.com/modelcontextprotocol/servers",
+      "isTrending": false,
+      "starCount": 86490,
+      "forkCount": 10870,
+      "openIssueCount": 492,
+      "isArchived": false,
+      "lastCommitDate": "2026-05-30T18:35:20Z",
+      "githubFetchedAt": "2026-05-31T01:45:55.821353+00:00"
+    },
+    "postgresql": {
+      "serverKey": "postgresql",
+      "repositoryURL": "https://github.com/modelcontextprotocol/servers",
+      "isTrending": false,
+      "starCount": 86490,
+      "forkCount": 10870,
+      "openIssueCount": 492,
+      "isArchived": false,
+      "lastCommitDate": "2026-05-30T18:35:20Z",
+      "githubFetchedAt": "2026-05-31T01:45:55.821353+00:00"
+    },
+    "sqlite": {
+      "serverKey": "sqlite",
+      "repositoryURL": "https://github.com/modelcontextprotocol/servers",
+      "isTrending": false,
+      "starCount": 86490,
+      "forkCount": 10870,
+      "openIssueCount": 492,
+      "isArchived": false,
+      "lastCommitDate": "2026-05-30T18:35:20Z",
+      "githubFetchedAt": "2026-05-31T01:45:55.821353+00:00"
+    },
+    "slack": {
+      "serverKey": "slack",
+      "repositoryURL": "https://github.com/modelcontextprotocol/servers",
+      "isTrending": false,
+      "starCount": 86490,
+      "forkCount": 10870,
+      "openIssueCount": 492,
+      "isArchived": false,
+      "lastCommitDate": "2026-05-30T18:35:20Z",
+      "githubFetchedAt": "2026-05-31T01:45:55.821353+00:00"
+    },
+    "google-drive": {
+      "serverKey": "google-drive",
+      "repositoryURL": "https://github.com/modelcontextprotocol/servers",
+      "isTrending": false,
+      "starCount": 86490,
+      "forkCount": 10870,
+      "openIssueCount": 492,
+      "isArchived": false,
+      "lastCommitDate": "2026-05-30T18:35:20Z",
+      "githubFetchedAt": "2026-05-31T01:45:55.821353+00:00"
+    },
+    "linear": {
+      "serverKey": "linear",
+      "repositoryURL": "https://github.com/jerhadf/linear-mcp-server",
+      "isTrending": false,
+      "starCount": 343,
+      "forkCount": 55,
+      "openIssueCount": 20,
+      "isArchived": false,
+      "lastCommitDate": "2025-05-01T19:45:30Z",
+      "githubFetchedAt": "2026-05-31T01:45:55.821353+00:00"
+    },
+    "notion": {
+      "serverKey": "notion",
+      "repositoryURL": "https://github.com/makenotion/notion-mcp-server",
+      "isTrending": false,
+      "starCount": 4373,
+      "forkCount": 568,
+      "openIssueCount": 164,
+      "isArchived": false,
+      "lastCommitDate": "2026-05-27T21:04:18Z",
+      "githubFetchedAt": "2026-05-31T01:45:55.821353+00:00"
+    },
+    "home-assistant": {
+      "serverKey": "home-assistant",
+      "repositoryURL": "https://github.com/tevonsb/homeassistant-mcp",
+      "isTrending": false,
+      "starCount": 574,
+      "forkCount": 57,
+      "openIssueCount": 20,
+      "isArchived": false,
+      "lastCommitDate": "2026-01-25T20:52:21Z",
+      "githubFetchedAt": "2026-05-31T01:45:55.821353+00:00"
+    },
+    "docker": {
+      "serverKey": "docker",
+      "repositoryURL": "https://github.com/ckreiling/mcp-server-docker",
+      "isTrending": false,
+      "starCount": 717,
+      "forkCount": 97,
+      "openIssueCount": 21,
+      "isArchived": false,
+      "lastCommitDate": "2025-06-05T02:52:13Z",
+      "githubFetchedAt": "2026-05-31T01:45:55.821353+00:00"
+    },
+    "aws-kb-retrieval": {
+      "serverKey": "aws-kb-retrieval",
+      "repositoryURL": "https://github.com/modelcontextprotocol/servers",
+      "isTrending": false,
+      "starCount": 86490,
+      "forkCount": 10870,
+      "openIssueCount": 492,
+      "isArchived": false,
+      "lastCommitDate": "2026-05-30T18:35:20Z",
+      "githubFetchedAt": "2026-05-31T01:45:55.821353+00:00"
+    },
+    "claude-code": {
+      "serverKey": "claude-code",
+      "repositoryURL": "https://github.com/anthropics/claude-code",
+      "isTrending": false,
+      "starCount": 128404,
+      "forkCount": 20953,
+      "openIssueCount": 8881,
+      "isArchived": false,
+      "lastCommitDate": "2026-05-30T02:42:09Z",
+      "githubFetchedAt": "2026-05-31T01:45:55.821353+00:00"
+    },
+    "exa-search": {
+      "serverKey": "exa-search",
+      "repositoryURL": "https://github.com/exa-labs/exa-mcp-server",
+      "isTrending": false,
+      "starCount": 4501,
+      "forkCount": 342,
+      "openIssueCount": 26,
+      "isArchived": false,
+      "lastCommitDate": "2026-05-20T14:08:19Z",
+      "githubFetchedAt": "2026-05-31T01:45:55.821353+00:00"
+    }
+  }
 }
