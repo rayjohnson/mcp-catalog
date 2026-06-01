@@ -1,7 +1,7 @@
 {
   "metadata": {
     "schemaVersion": "3",
-    "computedAt": "2026-06-01T18:34:38.454630Z"
+    "computedAt": "2026-06-01T18:41:32.731428Z"
   },
   "servers": {
     "moov-docs": {
@@ -12,7 +12,7 @@
       "githubCommits90d": null,
       "githubStarsIsShared": false,
       "baseScore": 8.34,
-      "signalsRefreshedAt": "2026-06-01T18:34:07Z",
+      "signalsRefreshedAt": "2026-06-01T18:40:44Z",
       "serverKey": "moov-docs"
     },
     "github": {
@@ -27,12 +27,12 @@
       "githubFetchedAt": "2026-06-01T06:43:54.836393+00:00",
       "npmWeeklyDownloads": 144590,
       "pypiMonthlyDownloads": null,
-      "dockerTotalPulls": 115768,
-      "smitheryUseCount": 3940,
+      "dockerTotalPulls": 115769,
+      "smitheryUseCount": 4061,
       "githubCommits90d": null,
       "githubStarsIsShared": true,
-      "baseScore": 27.94,
-      "signalsRefreshedAt": "2026-06-01T18:34:08Z"
+      "baseScore": 27.96,
+      "signalsRefreshedAt": "2026-06-01T18:40:46Z"
     },
     "filesystem": {
       "serverKey": "filesystem",
@@ -46,12 +46,12 @@
       "githubFetchedAt": "2026-06-01T06:43:54.836393+00:00",
       "npmWeeklyDownloads": 288509,
       "pypiMonthlyDownloads": null,
-      "dockerTotalPulls": 187356,
-      "smitheryUseCount": 5485,
+      "dockerTotalPulls": 187363,
+      "smitheryUseCount": 5246,
       "githubCommits90d": null,
       "githubStarsIsShared": true,
-      "baseScore": 29.26,
-      "signalsRefreshedAt": "2026-06-01T18:34:10Z"
+      "baseScore": 29.23,
+      "signalsRefreshedAt": "2026-06-01T18:40:48Z"
     },
     "git": {
       "serverKey": "git",
@@ -65,12 +65,12 @@
       "githubFetchedAt": "2026-06-01T06:43:54.836393+00:00",
       "npmWeeklyDownloads": null,
       "pypiMonthlyDownloads": 1257971,
-      "dockerTotalPulls": 112193,
-      "smitheryUseCount": 3940,
+      "dockerTotalPulls": 112197,
+      "smitheryUseCount": 4061,
       "githubCommits90d": null,
       "githubStarsIsShared": true,
-      "baseScore": 28.94,
-      "signalsRefreshedAt": "2026-06-01T18:34:12Z"
+      "baseScore": 28.96,
+      "signalsRefreshedAt": "2026-06-01T18:40:50Z"
     },
     "memory": {
       "serverKey": "memory",
@@ -84,12 +84,12 @@
       "githubFetchedAt": "2026-06-01T06:43:54.836393+00:00",
       "npmWeeklyDownloads": 71946,
       "pypiMonthlyDownloads": null,
-      "dockerTotalPulls": 469188,
-      "smitheryUseCount": 74,
+      "dockerTotalPulls": 469194,
+      "smitheryUseCount": 73,
       "githubCommits90d": null,
       "githubStarsIsShared": true,
       "baseScore": 25.05,
-      "signalsRefreshedAt": "2026-06-01T18:34:13Z"
+      "signalsRefreshedAt": "2026-06-01T18:40:53Z"
     },
     "fetch": {
       "serverKey": "fetch",
@@ -102,13 +102,13 @@
       "lastCommitDate": "2026-05-30T18:35:20Z",
       "githubFetchedAt": "2026-06-01T06:43:54.836393+00:00",
       "npmWeeklyDownloads": null,
-      "pypiMonthlyDownloads": 1209001,
-      "dockerTotalPulls": 1576658,
+      "pypiMonthlyDownloads": null,
+      "dockerTotalPulls": 1576664,
       "smitheryUseCount": 0,
       "githubCommits90d": null,
       "githubStarsIsShared": true,
-      "baseScore": 24.64,
-      "signalsRefreshedAt": "2026-06-01T18:34:15Z"
+      "baseScore": 8.2,
+      "signalsRefreshedAt": "2026-06-01T18:40:55Z"
     },
     "puppeteer": {
       "serverKey": "puppeteer",
@@ -127,7 +127,7 @@
       "githubCommits90d": null,
       "githubStarsIsShared": true,
       "baseScore": 20.8,
-      "signalsRefreshedAt": "2026-06-01T18:34:17Z"
+      "signalsRefreshedAt": "2026-06-01T18:40:57Z"
     },
     "brave-search": {
       "serverKey": "brave-search",
@@ -141,12 +141,12 @@
       "githubFetchedAt": "2026-06-01T06:43:54.836393+00:00",
       "npmWeeklyDownloads": 24496,
       "pypiMonthlyDownloads": null,
-      "dockerTotalPulls": 202493,
-      "smitheryUseCount": 11525,
+      "dockerTotalPulls": 202497,
+      "smitheryUseCount": 11570,
       "githubCommits90d": null,
       "githubStarsIsShared": true,
       "baseScore": 26.57,
-      "signalsRefreshedAt": "2026-06-01T18:34:19Z"
+      "signalsRefreshedAt": "2026-06-01T18:41:00Z"
     },
     "postgresql": {
       "serverKey": "postgresql",
@@ -161,11 +161,11 @@
       "npmWeeklyDownloads": 122395,
       "pypiMonthlyDownloads": null,
       "dockerTotalPulls": null,
-      "smitheryUseCount": 346,
+      "smitheryUseCount": 345,
       "githubCommits90d": null,
       "githubStarsIsShared": true,
       "baseScore": 21.07,
-      "signalsRefreshedAt": "2026-06-01T18:34:20Z"
+      "signalsRefreshedAt": "2026-06-01T18:41:02Z"
     },
     "sqlite": {
       "serverKey": "sqlite",
@@ -184,7 +184,7 @@
       "githubCommits90d": null,
       "githubStarsIsShared": true,
       "baseScore": 19.01,
-      "signalsRefreshedAt": "2026-06-01T18:34:22Z"
+      "signalsRefreshedAt": "2026-06-01T18:41:05Z"
     },
     "slack": {
       "serverKey": "slack",
@@ -199,11 +199,11 @@
       "npmWeeklyDownloads": 55089,
       "pypiMonthlyDownloads": null,
       "dockerTotalPulls": 302537,
-      "smitheryUseCount": 162,
+      "smitheryUseCount": 168,
       "githubCommits90d": null,
       "githubStarsIsShared": true,
-      "baseScore": 25.02,
-      "signalsRefreshedAt": "2026-06-01T18:34:24Z"
+      "baseScore": 25.05,
+      "signalsRefreshedAt": "2026-06-01T18:41:07Z"
     },
     "google-drive": {
       "serverKey": "google-drive",
@@ -218,11 +218,11 @@
       "npmWeeklyDownloads": 8011,
       "pypiMonthlyDownloads": null,
       "dockerTotalPulls": 7025,
-      "smitheryUseCount": 5485,
+      "smitheryUseCount": 5246,
       "githubCommits90d": null,
       "githubStarsIsShared": true,
-      "baseScore": 23.17,
-      "signalsRefreshedAt": "2026-06-01T18:34:25Z"
+      "baseScore": 23.14,
+      "signalsRefreshedAt": "2026-06-01T18:41:09Z"
     },
     "linear": {
       "serverKey": "linear",
@@ -237,11 +237,11 @@
       "npmWeeklyDownloads": 644,
       "pypiMonthlyDownloads": null,
       "dockerTotalPulls": null,
-      "smitheryUseCount": 1953,
+      "smitheryUseCount": 1975,
       "githubCommits90d": null,
       "githubStarsIsShared": false,
       "baseScore": 11.37,
-      "signalsRefreshedAt": "2026-06-01T18:34:26Z"
+      "signalsRefreshedAt": "2026-06-01T18:41:12Z"
     },
     "notion": {
       "serverKey": "notion",
@@ -256,11 +256,11 @@
       "npmWeeklyDownloads": 81080,
       "pypiMonthlyDownloads": null,
       "dockerTotalPulls": null,
-      "smitheryUseCount": 2302,
+      "smitheryUseCount": 2332,
       "githubCommits90d": null,
       "githubStarsIsShared": false,
-      "baseScore": 26.77,
-      "signalsRefreshedAt": "2026-06-01T18:34:27Z"
+      "baseScore": 26.78,
+      "signalsRefreshedAt": "2026-06-01T18:41:13Z"
     },
     "home-assistant": {
       "serverKey": "home-assistant",
@@ -273,13 +273,13 @@
       "lastCommitDate": "2026-01-25T20:52:21Z",
       "githubFetchedAt": "2026-06-01T06:43:54.836393+00:00",
       "npmWeeklyDownloads": null,
-      "pypiMonthlyDownloads": 8994,
+      "pypiMonthlyDownloads": null,
       "dockerTotalPulls": null,
       "smitheryUseCount": 105,
       "githubCommits90d": null,
       "githubStarsIsShared": false,
-      "baseScore": 13.09,
-      "signalsRefreshedAt": "2026-06-01T18:34:29Z"
+      "baseScore": 3.04,
+      "signalsRefreshedAt": "2026-06-01T18:41:15Z"
     },
     "docker": {
       "serverKey": "docker",
@@ -298,7 +298,7 @@
       "githubCommits90d": null,
       "githubStarsIsShared": false,
       "baseScore": 11.31,
-      "signalsRefreshedAt": "2026-06-01T18:34:30Z"
+      "signalsRefreshedAt": "2026-06-01T18:41:17Z"
     },
     "aws-kb-retrieval": {
       "serverKey": "aws-kb-retrieval",
@@ -317,7 +317,7 @@
       "githubCommits90d": null,
       "githubStarsIsShared": true,
       "baseScore": 3.62,
-      "signalsRefreshedAt": "2026-06-01T18:34:32Z"
+      "signalsRefreshedAt": "2026-06-01T18:41:18Z"
     },
     "claude-code": {
       "serverKey": "claude-code",
@@ -336,7 +336,7 @@
       "githubCommits90d": null,
       "githubStarsIsShared": false,
       "baseScore": 7.0,
-      "signalsRefreshedAt": "2026-06-01T18:34:33Z"
+      "signalsRefreshedAt": "2026-06-01T18:41:19Z"
     },
     "exa-search": {
       "serverKey": "exa-search",
@@ -351,24 +351,68 @@
       "npmWeeklyDownloads": 15226,
       "pypiMonthlyDownloads": null,
       "dockerTotalPulls": null,
-      "smitheryUseCount": 21707,
+      "smitheryUseCount": 21531,
       "githubCommits90d": null,
       "githubStarsIsShared": false,
       "baseScore": 26.05,
-      "signalsRefreshedAt": "2026-06-01T18:34:34Z"
+      "signalsRefreshedAt": "2026-06-01T18:41:21Z"
     },
     "obsidian": {
       "npmWeeklyDownloads": null,
+      "pypiMonthlyDownloads": 30589,
+      "dockerTotalPulls": null,
+      "smitheryUseCount": 0,
+      "githubCommits90d": null,
+      "githubStarsIsShared": false,
+      "baseScore": 11.65,
+      "signalsRefreshedAt": "2026-06-01T18:41:23Z",
+      "serverKey": "obsidian"
+    },
+    "semble": {
+      "npmWeeklyDownloads": null,
+      "pypiMonthlyDownloads": 95587,
+      "dockerTotalPulls": null,
+      "smitheryUseCount": 0,
+      "githubCommits90d": null,
+      "githubStarsIsShared": false,
+      "baseScore": 18.14,
+      "signalsRefreshedAt": "2026-06-01T18:41:24Z",
+      "serverKey": "semble"
+    },
+    "context7": {
+      "npmWeeklyDownloads": 828354,
+      "pypiMonthlyDownloads": null,
+      "dockerTotalPulls": null,
+      "smitheryUseCount": 8253,
+      "githubCommits90d": null,
+      "githubStarsIsShared": false,
+      "baseScore": 28.63,
+      "signalsRefreshedAt": "2026-06-01T18:41:25Z",
+      "serverKey": "context7"
+    },
+    "playwright": {
+      "npmWeeklyDownloads": 4836686,
       "pypiMonthlyDownloads": null,
       "dockerTotalPulls": null,
       "smitheryUseCount": 0,
       "githubCommits90d": null,
       "githubStarsIsShared": false,
-      "baseScore": 0.0,
-      "signalsRefreshedAt": "2026-06-01T18:34:35Z",
-      "serverKey": "obsidian"
+      "baseScore": 25.05,
+      "signalsRefreshedAt": "2026-06-01T18:41:27Z",
+      "serverKey": "playwright"
     },
-    "semble": {
+    "sequential-thinking": {
+      "npmWeeklyDownloads": 99002,
+      "pypiMonthlyDownloads": null,
+      "dockerTotalPulls": null,
+      "smitheryUseCount": 0,
+      "githubCommits90d": null,
+      "githubStarsIsShared": true,
+      "baseScore": 19.99,
+      "signalsRefreshedAt": "2026-06-01T18:41:29Z",
+      "serverKey": "sequential-thinking"
+    },
+    "zapier": {
       "npmWeeklyDownloads": null,
       "pypiMonthlyDownloads": null,
       "dockerTotalPulls": null,
@@ -376,19 +420,30 @@
       "githubCommits90d": null,
       "githubStarsIsShared": false,
       "baseScore": 5.0,
-      "signalsRefreshedAt": "2026-06-01T18:34:37Z",
-      "serverKey": "semble"
+      "signalsRefreshedAt": "2026-06-01T18:41:30Z",
+      "serverKey": "zapier"
     },
-    "context7": {
-      "npmWeeklyDownloads": 828354,
+    "figma": {
+      "npmWeeklyDownloads": null,
       "pypiMonthlyDownloads": null,
       "dockerTotalPulls": null,
-      "smitheryUseCount": 8197,
+      "smitheryUseCount": 413,
       "githubCommits90d": null,
       "githubStarsIsShared": false,
-      "baseScore": 28.63,
-      "signalsRefreshedAt": "2026-06-01T18:34:38Z",
-      "serverKey": "context7"
+      "baseScore": 8.93,
+      "signalsRefreshedAt": "2026-06-01T18:41:31Z",
+      "serverKey": "figma"
+    },
+    "firecrawl": {
+      "npmWeeklyDownloads": 114950,
+      "pypiMonthlyDownloads": null,
+      "dockerTotalPulls": null,
+      "smitheryUseCount": 1384,
+      "githubCommits90d": null,
+      "githubStarsIsShared": false,
+      "baseScore": 24.89,
+      "signalsRefreshedAt": "2026-06-01T18:41:32Z",
+      "serverKey": "firecrawl"
     }
   }
 }

@@ -2,7 +2,7 @@
   "metadata": {
     "schemaVersion": "3",
     "bundledAt": "2026-06-01T00:00:00Z",
-    "entryCount": 22
+    "entryCount": 27
   },
   "entries": [
     {
@@ -566,6 +566,127 @@
       "editorialRank": null,
       "alternativeTo": null,
       "serverKey": "context7"
+    },
+    {
+      "id": "playwright",
+      "displayName": "Playwright",
+      "category": "developer-tools",
+      "shortDescription": "Browser automation via accessibility tree — no vision model needed.",
+      "curatorNote": "Microsoft's official browser MCP. Uses the page accessibility tree rather than screenshots, so it works with any model. Supports Chromium, Firefox, and WebKit. A fast, capable alternative to Puppeteer.",
+      "transportType": "stdio",
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"],
+      "url": "",
+      "envVars": [],
+      "requiredArgs": [],
+      "documentationURL": "https://github.com/microsoft/playwright-mcp",
+      "repositoryURL": "https://github.com/microsoft/playwright-mcp",
+      "isOfficial": true,
+      "relatedApp": null,
+      "editorialRank": null,
+      "alternativeTo": "puppeteer",
+      "serverKey": "playwright"
+    },
+    {
+      "id": "sequential-thinking",
+      "displayName": "Sequential Thinking",
+      "category": "developer-tools",
+      "shortDescription": "Structured chain-of-thought reasoning with branching and revision.",
+      "curatorNote": "From the MCP team. Gives Claude a dedicated tool for multi-step reasoning — useful when you want the model to slow down, revise intermediate steps, and show its work on complex planning or analysis tasks.",
+      "transportType": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "url": "",
+      "envVars": [],
+      "requiredArgs": [],
+      "documentationURL": "https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking",
+      "repositoryURL": "https://github.com/modelcontextprotocol/servers",
+      "isOfficial": true,
+      "relatedApp": null,
+      "editorialRank": null,
+      "alternativeTo": null,
+      "serverKey": "sequential-thinking"
+    },
+    {
+      "id": "zapier",
+      "displayName": "Zapier",
+      "category": "productivity",
+      "shortDescription": "Trigger actions across 9,000+ apps via Zapier automations.",
+      "curatorNote": "Zapier's official remote MCP. Exposes 40,000+ actions — send emails, create tasks, post to Slack, update CRMs — without writing code. Generate your API key at mcp.zapier.com to configure the URL.",
+      "transportType": "stdio",
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.zapier.com/api/mcp/mcp"],
+      "url": "",
+      "envVars": [
+        {
+          "name": "ZAPIER_MCP_API_KEY",
+          "description": "API key from mcp.zapier.com. Alternatively, embed it directly in the server URL as a path parameter.",
+          "isRequired": true,
+          "isSensitive": true
+        }
+      ],
+      "requiredArgs": [],
+      "documentationURL": "https://zapier.com/mcp",
+      "repositoryURL": "https://github.com/zapier/zapier-mcp",
+      "isOfficial": true,
+      "relatedApp": null,
+      "editorialRank": null,
+      "alternativeTo": null,
+      "serverKey": "zapier"
+    },
+    {
+      "id": "figma",
+      "displayName": "Figma",
+      "category": "developer-tools",
+      "shortDescription": "Read Figma design context and layout data in AI coding workflows.",
+      "curatorNote": "Figma's official MCP. Lets AI agents read design files, component structure, and layout intent — so generated code actually matches the design. Requires a Figma personal access token.",
+      "transportType": "stdio",
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.figma.com/mcp"],
+      "url": "",
+      "envVars": [
+        {
+          "name": "FIGMA_PERSONAL_ACCESS_TOKEN",
+          "description": "Personal access token from figma.com → Settings → Security. Needs read access to the files you want to query.",
+          "isRequired": true,
+          "isSensitive": true
+        }
+      ],
+      "requiredArgs": [],
+      "documentationURL": "https://help.figma.com/hc/en-us/articles/32132100833559",
+      "repositoryURL": "https://github.com/figma/mcp-server-guide",
+      "isOfficial": true,
+      "relatedApp": "Figma",
+      "editorialRank": null,
+      "alternativeTo": null,
+      "serverKey": "figma"
+    },
+    {
+      "id": "firecrawl",
+      "displayName": "Firecrawl",
+      "category": "search-web",
+      "shortDescription": "Web scraping, site crawling, and search with JS rendering.",
+      "curatorNote": "From the Firecrawl team. Goes further than simple fetch — handles JavaScript-heavy pages, crawls entire sites, and extracts clean markdown. Requires a free API key from firecrawl.dev.",
+      "transportType": "stdio",
+      "command": "npx",
+      "args": ["-y", "firecrawl-mcp"],
+      "url": "",
+      "envVars": [
+        {
+          "name": "FIRECRAWL_API_KEY",
+          "description": "API key from firecrawl.dev. Free tier available with generous limits.",
+          "isRequired": true,
+          "isSensitive": true
+        }
+      ],
+      "requiredArgs": [],
+      "documentationURL": "https://docs.firecrawl.dev/mcp",
+      "repositoryURL": "https://github.com/firecrawl/firecrawl-mcp-server",
+      "isOfficial": true,
+      "relatedApp": null,
+      "editorialRank": null,
+      "alternativeTo": null,
+      "serverKey": "firecrawl"
     }
   ]
 }

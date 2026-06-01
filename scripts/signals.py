@@ -195,6 +195,36 @@ SIGNAL_CONFIG: dict[str, dict] = {
         "docker": None,
         "gh_path": None,
     },
+    "playwright": {
+        "npm": "@playwright/mcp",
+        "pypi": None,
+        "docker": None,
+        "gh_path": None,
+    },
+    "sequential-thinking": {
+        "npm": "@modelcontextprotocol/server-sequential-thinking",
+        "pypi": None,
+        "docker": None,
+        "gh_path": "src/sequentialthinking",
+    },
+    "zapier": {
+        "npm": None,
+        "pypi": None,
+        "docker": None,
+        "gh_path": None,
+    },
+    "figma": {
+        "npm": None,
+        "pypi": None,
+        "docker": None,
+        "gh_path": None,
+    },
+    "firecrawl": {
+        "npm": "firecrawl-mcp",
+        "pypi": None,
+        "docker": None,
+        "gh_path": None,
+    },
 }
 
 # Shared-repo server keys: their GitHub star count spans the whole mono-repo,
@@ -202,7 +232,7 @@ SIGNAL_CONFIG: dict[str, dict] = {
 SHARED_REPO_KEYS = {
     "github", "filesystem", "git", "memory", "fetch", "puppeteer",
     "brave-search", "postgresql", "sqlite", "slack", "google-drive",
-    "aws-kb-retrieval",
+    "aws-kb-retrieval", "sequential-thinking",
 }
 
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN", "")
