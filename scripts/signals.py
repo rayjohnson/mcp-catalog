@@ -177,6 +177,24 @@ SIGNAL_CONFIG: dict[str, dict] = {
         "docker": None,
         "gh_path": None,
     },
+    "obsidian": {
+        "npm": None,
+        "pypi": "mcp-obsidian",
+        "docker": None,
+        "gh_path": None,
+    },
+    "semble": {
+        "npm": None,
+        "pypi": "semble",
+        "docker": None,
+        "gh_path": None,
+    },
+    "context7": {
+        "npm": "@upstash/context7-mcp",
+        "pypi": None,
+        "docker": None,
+        "gh_path": None,
+    },
 }
 
 # Shared-repo server keys: their GitHub star count spans the whole mono-repo,

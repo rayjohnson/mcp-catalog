@@ -2,7 +2,7 @@
   "metadata": {
     "schemaVersion": "3",
     "bundledAt": "2026-06-01T00:00:00Z",
-    "entryCount": 19
+    "entryCount": 22
   },
   "entries": [
     {
@@ -492,6 +492,80 @@
       "editorialRank": null,
       "alternativeTo": null,
       "serverKey": "exa-search"
+    },
+    {
+      "id": "obsidian",
+      "displayName": "Obsidian",
+      "category": "productivity",
+      "shortDescription": "Read, search, and edit Obsidian vault notes via Local REST API.",
+      "curatorNote": "Requires the Obsidian Local REST API community plugin to be installed and running in Obsidian. Get the API key from the plugin settings panel.",
+      "transportType": "stdio",
+      "command": "uvx",
+      "args": ["mcp-obsidian"],
+      "url": "",
+      "envVars": [
+        {
+          "name": "OBSIDIAN_API_KEY",
+          "description": "API key from the Obsidian Local REST API plugin settings. Find it in Obsidian → Settings → Local REST API.",
+          "isRequired": true,
+          "isSensitive": true
+        }
+      ],
+      "requiredArgs": [],
+      "documentationURL": "https://github.com/MarkusPfundstein/mcp-obsidian",
+      "repositoryURL": "https://github.com/MarkusPfundstein/mcp-obsidian",
+      "isOfficial": false,
+      "relatedApp": "Obsidian",
+      "editorialRank": null,
+      "alternativeTo": null,
+      "serverKey": "obsidian"
+    },
+    {
+      "id": "semble",
+      "displayName": "Semble",
+      "category": "developer-tools",
+      "shortDescription": "Fast hybrid code search for AI agents across local and remote git repos.",
+      "curatorNote": "From the Semble team. Indexes a repo in ~250ms and answers queries in ~1.5ms using ~98% fewer tokens than grep-and-read. Works with local paths or remote git URLs — no GPU or internet required.",
+      "transportType": "stdio",
+      "command": "uvx",
+      "args": ["--from", "semble[mcp]", "semble"],
+      "url": "",
+      "envVars": [],
+      "requiredArgs": [],
+      "documentationURL": "https://github.com/MinishLab/semble",
+      "repositoryURL": "https://github.com/MinishLab/semble",
+      "isOfficial": true,
+      "relatedApp": null,
+      "editorialRank": null,
+      "alternativeTo": null,
+      "serverKey": "semble"
+    },
+    {
+      "id": "context7",
+      "displayName": "Context7",
+      "category": "developer-tools",
+      "shortDescription": "Injects current, version-accurate library docs into LLM context on demand.",
+      "curatorNote": "From Upstash. Resolves the stale-training-data problem by fetching up-to-date documentation and code examples at query time. Free to use; an API key unlocks higher rate limits.",
+      "transportType": "stdio",
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"],
+      "url": "",
+      "envVars": [
+        {
+          "name": "CONTEXT7_API_KEY",
+          "description": "API key from context7.com/dashboard. Optional — enables higher rate limits.",
+          "isRequired": false,
+          "isSensitive": true
+        }
+      ],
+      "requiredArgs": [],
+      "documentationURL": "https://context7.com",
+      "repositoryURL": "https://github.com/upstash/context7",
+      "isOfficial": true,
+      "relatedApp": null,
+      "editorialRank": null,
+      "alternativeTo": null,
+      "serverKey": "context7"
     }
   ]
 }
