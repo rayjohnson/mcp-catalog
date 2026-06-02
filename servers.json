@@ -2,7 +2,7 @@
   "metadata": {
     "schemaVersion": "3",
     "bundledAt": "2026-06-01T00:00:00Z",
-    "entryCount": 27
+    "entryCount": 28
   },
   "entries": [
     {
@@ -687,6 +687,26 @@
       "editorialRank": null,
       "alternativeTo": null,
       "serverKey": "firecrawl"
+    },
+    {
+      "id": "opentofu",
+      "displayName": "OpenTofu",
+      "category": "infrastructure",
+      "shortDescription": "Search the OpenTofu Registry for providers, modules, resources, and data sources.",
+      "curatorNote": "Officially maintained by the OpenTofu project (Linux Foundation). Gives AI assistants access to registry search and documentation for all 3,900+ providers and 23,600+ modules. No auth or env vars required — the hosted Cloudflare Worker endpoint is always up-to-date. Also available as a local Node.js server via npx @opentofu/opentofu-mcp-server for offline or air-gapped use.",
+      "transportType": "sse",
+      "command": "",
+      "args": [],
+      "url": "https://mcp.opentofu.org/sse",
+      "envVars": [],
+      "requiredArgs": [],
+      "documentationURL": "https://github.com/opentofu/opentofu-mcp-server",
+      "repositoryURL": "https://github.com/opentofu/opentofu-mcp-server",
+      "isOfficial": true,
+      "relatedApp": null,
+      "editorialRank": null,
+      "alternativeTo": null,
+      "serverKey": "opentofu"
     }
   ]
 }
