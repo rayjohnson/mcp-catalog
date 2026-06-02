@@ -1,7 +1,7 @@
 ---
 name: Enrich Server Submission
 
-on:
+"on":
   issues:
     types: [labeled]
 
@@ -19,13 +19,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
 
       - name: Install dependencies
-        run: pip install anthropic requests PyGithub
+        run: uv pip install --system anthropic requests PyGithub
 
       - name: Run enrichment
         env:
@@ -39,14 +37,16 @@ jobs:
 
       - name: Create Pull Request
         if: env.ENRICHED_ENTRY_PATH != ''
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: submission/issue-${{ github.event.issue.number }}
           title: >
-            [Submission] ${{ env.ENRICHED_SERVER_NAME }} (issue #${{ github.event.issue.number }})
+            [Submission] ${{ env.ENRICHED_SERVER_NAME }}
+            (issue #${{ github.event.issue.number }})
           body: |
-            AI-enriched catalog entry from issue #${{ github.event.issue.number }}.
+            AI-enriched catalog entry from issue
+            #${{ github.event.issue.number }}.
 
             **Curator checklist before merging:**
             - [ ] Display name and description are accurate
@@ -59,4 +59,5 @@ jobs:
             Closes #${{ github.event.issue.number }}
           draft: true
           commit-message: >
-            Add ${{ env.ENRICHED_SERVER_NAME }} to catalog (from issue #${{ github.event.issue.number }})
+            Add ${{ env.ENRICHED_SERVER_NAME }} to catalog
+            (from issue #${{ github.event.issue.number }})
