@@ -1,0 +1,4 @@
+requests
+anthropic
+PyGithub
+google-cloud-firestore>=2.16

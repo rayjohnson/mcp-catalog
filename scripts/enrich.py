@@ -317,6 +317,113 @@ def call_claude(identifier: str, resolved: dict, existing: list) -> dict:
 # Main
 # ---------------------------------------------------------------------------
 
+def extract_structured_config(body: str) -> dict | None:
+    """
+    Return parsed JSON from a '### Structured Config' block, or None.
+    Used for in-app submissions that already have command/args/envVars.
+    """
+    marker = "### Structured Config"
+    if marker not in body:
+        return None
+    after = body.split(marker, 1)[1]
+    m = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", after, re.DOTALL)
+    if not m:
+        return None
+    try:
+        return json.loads(m.group(1))
+    except json.JSONDecodeError:
+        return None
+
+
+STRUCTURED_ENRICHMENT_PROMPT = """\
+You are a curator for mcp-catalog, a curated list of MCP (Model Context Protocol) servers.
+
+A user submitted this MCP server directly from mcp-inator. The command, args, and env vars
+are already known. Your job is to fill in the catalog metadata.
+
+## Submitted server config
+
+{config_json}
+
+## Existing catalog entries (for duplicate/similar detection)
+
+{existing_summary}
+
+## Instructions
+
+Produce a JSON object with EXACTLY these fields:
+
+{{
+  "id": "<kebab-case unique id matching serverKey if valid, else derive from displayName>",
+  "displayName": "{display_name}",
+  "category": "<one of: Code & Development, Productivity, Data & Analytics, Communication, \
+Infrastructure, AI & LLMs, Web & Browser>",
+  "shortDescription": "<one sentence, max 120 chars, no marketing language>",
+  "curatorNote": "<1-3 sentences: what this server does well and any gotchas>",
+  "transportType": "{transport_type}",
+  "command": "{command}",
+  "args": {args_json},
+  "url": "{url}",
+  "envVars": {env_vars_json},
+  "requiredArgs": [],
+  "documentationURL": "<URL if you can infer it from the server name, else null>",
+  "repositoryURL": "<GitHub URL if you can infer it from command/args, else null>",
+  "isVerified": false,
+  "isFirstParty": <true if the maintainer org IS the company that owns the service, else false>,
+  "alternativeTo": null,
+  "serverKey": "{server_key}"
+}}
+
+Use the user's notes as a hint for shortDescription/curatorNote: "{notes}"
+
+Rules:
+- Keep command/args/url/envVars/transportType exactly as provided above
+- Infer repositoryURL and documentationURL from the command/args (e.g. npx @stripe/mcp → stripe.com)
+- If you see an existing catalog entry for the SAME service, add a "comparison_note" field
+- Output ONLY the JSON object, no markdown, no explanation
+"""
+
+
+def call_claude_structured(config: dict, existing: list) -> dict:
+    """Faster enrichment path for in-app submissions — skips identifier resolution."""
+    client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+
+    existing_summary = "\n".join(
+        f"- {e['id']}: {e['shortDescription']}" for e in existing[:20]
+    )
+
+    env_vars_for_prompt = [
+        {"name": ev.get("name", ""), "description": ev.get("description", ""),
+         "isRequired": ev.get("isRequired", False), "isSensitive": ev.get("isSensitive", False)}
+        for ev in config.get("envVars", [])
+    ]
+
+    prompt = STRUCTURED_ENRICHMENT_PROMPT.format(
+        config_json=json.dumps(config, indent=2),
+        existing_summary=existing_summary or "(none)",
+        display_name=config.get("displayName", ""),
+        transport_type=config.get("transportType", "stdio"),
+        command=config.get("command", ""),
+        args_json=json.dumps(config.get("args", [])),
+        url=config.get("url", ""),
+        env_vars_json=json.dumps(env_vars_for_prompt),
+        server_key=config.get("serverKey", ""),
+        notes=config.get("notes", ""),
+    )
+
+    message = client.messages.create(
+        model=CLAUDE_MODEL,
+        max_tokens=2048,
+        messages=[{"role": "user", "content": prompt}]
+    )
+
+    raw = message.content[0].text.strip()
+    if raw.startswith("```"):
+        raw = re.sub(r"^```[a-z]*\n?", "", raw)
+        raw = re.sub(r"\n?```$", "", raw)
+    return json.loads(raw)
+
+
 def extract_identifier_from_body(body: str) -> str:
     """Pull the server_identifier field out of the GitHub issue form body."""
     # GitHub issue forms produce markdown with field headers
@@ -345,73 +452,88 @@ def main():
 
     gh = Github(gh_token)
 
-    # 1. Extract identifier
-    identifier = extract_identifier_from_body(issue_body).strip()
-    if not identifier:
-        post_comment(gh, repo_name, issue_number,
-            "Could not find a server identifier in the issue body. "
-            "Please reopen using the submission template and provide a repo URL, "
-            "npm package name, uvx package name, or Docker image name.")
-        sys.exit(0)
-
-    print(f"Processing identifier: {identifier}")
-
-    # 2. Resolve identifier
-    try:
-        resolved = resolve_identifier(identifier)
-    except Exception as e:
-        post_comment(gh, repo_name, issue_number,
-            f"Failed to resolve `{identifier}`: {e}\n\n"
-            "If this is a private or intranet-only server, it cannot be added via "
-            "the automated pipeline. Contact a curator directly.")
-        sys.exit(0)
-
-    if not resolved.get("content") or "no README found" in resolved.get("content", ""):
-        post_comment(gh, repo_name, issue_number,
-            f"Could not fetch any documentation for `{identifier}`. "
-            f"Tried: {resolved['type']} resolution.\n\n"
-            "Please check the identifier and resubmit, or contact a curator.")
-        sys.exit(0)
-
-    # 3. Load existing servers
+    # 1. Load existing servers (needed for both paths)
     existing = load_existing_servers()
 
-    # 4. Duplicate check
-    duplicate = find_duplicate(identifier, resolved, existing)
-    if duplicate:
-        post_comment(gh, repo_name, issue_number,
-            f"This server (`{identifier}`) is already in the catalog as "
-            f"**{duplicate['displayName']}** (`{duplicate['id']}`). "
-            f"No PR will be created.\n\n"
-            f"If you think the existing entry is outdated or incorrect, "
-            f"please open a regular issue describing what needs to change.")
-        sys.exit(0)
+    # 2. Check for in-app structured submission first
+    structured = extract_structured_config(issue_body)
+    if structured:
+        print(f"Structured config detected: {structured.get('displayName', '?')}")
 
-    # 5. Call Claude
-    print("Calling Claude for enrichment...")
-    try:
-        entry = call_claude(identifier, resolved, existing)
-    except Exception as e:
-        post_comment(gh, repo_name, issue_number,
-            f"AI enrichment failed: {e}\n\n"
-            "A curator will need to add this entry manually. "
-            "Please keep this issue open.")
-        sys.exit(1)
+        # Duplicate check by serverKey
+        dup = find_duplicate(structured.get("serverKey", ""), {"repository_url": None}, existing)
+        if dup:
+            post_comment(gh, repo_name, issue_number,
+                f"This server (`{structured.get('serverKey')}`) is already in the catalog as "
+                f"**{dup['displayName']}** (`{dup['id']}`). No PR will be created.\n\n"
+                "If you think the existing entry is outdated, open a regular issue.")
+            sys.exit(0)
 
-    # 6. Extract comparison note before writing entry
+        print("Calling Claude for structured enrichment...")
+        try:
+            entry = call_claude_structured(structured, existing)
+        except Exception as e:
+            post_comment(gh, repo_name, issue_number,
+                f"AI enrichment failed: {e}\n\nA curator will need to add this entry manually.")
+            sys.exit(1)
+
+    else:
+        # 3. Fall back to identifier resolution (manual GitHub issue template path)
+        identifier = extract_identifier_from_body(issue_body).strip()
+        if not identifier:
+            post_comment(gh, repo_name, issue_number,
+                "Could not find a server identifier in the issue body. "
+                "Please reopen using the submission template and provide a repo URL, "
+                "npm package name, uvx package name, or Docker image name.")
+            sys.exit(0)
+
+        print(f"Processing identifier: {identifier}")
+
+        try:
+            resolved = resolve_identifier(identifier)
+        except Exception as e:
+            post_comment(gh, repo_name, issue_number,
+                f"Failed to resolve `{identifier}`: {e}\n\n"
+                "If this is a private or intranet-only server, contact a curator directly.")
+            sys.exit(0)
+
+        if not resolved.get("content") or "no README found" in resolved.get("content", ""):
+            post_comment(gh, repo_name, issue_number,
+                f"Could not fetch any documentation for `{identifier}`. "
+                f"Tried: {resolved['type']} resolution.\n\n"
+                "Please check the identifier and resubmit, or contact a curator.")
+            sys.exit(0)
+
+        dup = find_duplicate(identifier, resolved, existing)
+        if dup:
+            post_comment(gh, repo_name, issue_number,
+                f"This server (`{identifier}`) is already in the catalog as "
+                f"**{dup['displayName']}** (`{dup['id']}`). No PR will be created.\n\n"
+                "If you think the existing entry is outdated, open a regular issue.")
+            sys.exit(0)
+
+        print("Calling Claude for enrichment...")
+        try:
+            entry = call_claude(identifier, resolved, existing)
+        except Exception as e:
+            post_comment(gh, repo_name, issue_number,
+                f"AI enrichment failed: {e}\n\nA curator will need to add this entry manually.")
+            sys.exit(1)
+
+    # 4. Extract comparison note before writing entry
     comparison_note = entry.pop("comparison_note", None)
 
-    # 7. Write enriched entry to temp file for the PR action
+    # 5. Write enriched entry to temp file for the PR action
     with open(ENRICHED_ENTRY_PATH, "w") as f:
         json.dump(entry, f, indent=2)
 
-    # 8. Set GitHub Actions outputs
-    server_name = entry.get("displayName", identifier)
+    # 6. Set GitHub Actions outputs
+    server_name = entry.get("displayName", "Unknown")
     with open(os.environ.get("GITHUB_ENV", "/dev/null"), "a") as env_file:
         env_file.write(f"ENRICHED_ENTRY_PATH={ENRICHED_ENTRY_PATH}\n")
         env_file.write(f"ENRICHED_SERVER_NAME={server_name}\n")
 
-    # 9. Post comparison note if same service exists
+    # 7. Post comparison note if same service exists
     if comparison_note:
         post_comment(gh, repo_name, issue_number,
             f"**Note for curator**: A similar service may already exist in the catalog.\n\n"

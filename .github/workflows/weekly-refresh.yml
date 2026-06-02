@@ -13,10 +13,17 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+      id-token: write
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: ${{ vars.GCP_CATALOG_SA }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -27,7 +34,7 @@ jobs:
         uses: astral-sh/setup-uv@v4
 
       - name: Install dependencies
-        run: pip install requests anthropic PyGithub
+        run: pip install -r scripts/requirements.txt
 
       - name: Run refresh
         env:
@@ -45,6 +52,6 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add stats.json usage.json
+          git add stats.json
           git diff --cached --quiet || git commit -m "chore: weekly stats + signals refresh"
           git push
