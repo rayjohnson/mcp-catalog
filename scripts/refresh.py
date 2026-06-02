@@ -17,16 +17,19 @@ Environment variables:
 import json
 import os
 import re
+import sys
 import time
 from datetime import datetime, timezone
 
 import anthropic
 import requests
 from github import Github
+from google.cloud import firestore as fs
 
 SERVERS_FILE = "servers.json"
 STATS_FILE = "stats.json"
-USAGE_FILE = "usage.json"
+GCP_PROJECT = "ray-johnson-mcp-inator"
+USAGE_COLLECTION = "server_usage"
 
 CLAUDE_MODEL = "claude-haiku-4-5-20251001"
 
@@ -134,15 +137,18 @@ def detect_env_drift(readme: str, catalog_vars: list, client: anthropic.Anthropi
 
 
 # ---------------------------------------------------------------------------
-# Usage fold-in
+# Usage counts from Firestore
 # ---------------------------------------------------------------------------
 
-def load_usage() -> dict:
-    if not os.path.exists(USAGE_FILE):
-        return {}
-    with open(USAGE_FILE) as f:
-        data = json.load(f)
-    return data.get("servers", {})
+def load_usage_counts() -> dict:
+    """Read per-server usage counts from Firestore. Exits with code 1 on failure."""
+    try:
+        db = fs.Client(project=GCP_PROJECT)
+        docs = db.collection(USAGE_COLLECTION).stream()
+        return {doc.id: doc.to_dict().get("count", 0) for doc in docs}
+    except Exception as exc:
+        print(f"ERROR: Could not read usage counts from Firestore: {exc}", file=sys.stderr)
+        sys.exit(1)
 
 
 # ---------------------------------------------------------------------------
@@ -217,8 +223,8 @@ def main():
             stats_data = json.load(f)
     existing_metrics = stats_data.get("servers", {})
 
-    # Load usage counts
-    usage = load_usage()
+    # Load usage counts from Firestore
+    usage_counts = load_usage_counts()
 
     now_iso = datetime.now(timezone.utc).isoformat()
     updated_metrics = {}
@@ -269,12 +275,10 @@ def main():
             metrics["isArchived"] = False
             metrics["isTrending"] = existing.get("isTrending", False)
 
-        # Fold in usage counts
-        server_usage = usage.get(server_key, {})
-        if server_usage:
-            metrics["userCount"] = server_usage.get("userCount")
-            metrics["enabledCount"] = server_usage.get("enabledCount")
-            metrics["weeklyActiveCount"] = server_usage.get("weeklyActiveCount")
+        # Fold in usage counts from Firestore
+        usage_count = usage_counts.get(server_key, 0)
+        if usage_count > 0:
+            metrics["usageCount"] = usage_count
             metrics["usageAggregatedAt"] = now_iso
 
         # Remove None values for cleaner JSON
