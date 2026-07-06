@@ -1,7 +1,7 @@
 {
   "metadata": {
     "schemaVersion": "1",
-    "lastSubredditReviewDate": "2026-05-31T01:15:36.109704+00:00",
+    "lastSubredditReviewDate": "2026-07-06T08:06:54.401294+00:00",
     "nextSubredditReviewDate": null
   },
   "subreddits": [
@@ -9,6 +9,8 @@
     "MCPservers",
     "LocalLLM",
     "OpenSourceAI",
-    "ToolUse"
+    "ToolUse",
+    "AnthropicAI",
+    "AIAgents"
   ]
 }
